@@ -1,0 +1,98 @@
+import customtkinter
+
+window = customtkinter.CTk()
+window.title("clicker game")
+window.geometry("580x580")
+window.resizable(False, False)
+customtkinter.set_appearance_mode("system")
+
+total = 1
+key = False
+key2 = False
+key3 = False
+key4 = False
+
+def upgrade_1():
+    global total, key
+    if total >= 50:
+        key = "upgrade1"
+        print("you have upgraded +5")
+    else:
+        print("insufficient funds")
+
+def upgrade_2():
+    global total, key2
+    if total >= 100:
+        key2 = "upgrade2"
+        print("upgrade +10")
+    else:
+        print("insufficient funds")
+
+def upgrade_3():
+    global total, key3
+    if total >= 1000:
+        key3 = "upgrade3"
+        print("you have upgraded +20")
+    else:
+        print("Insufficent funds")
+
+def upgrade_4():
+    global total, key4
+    if total >= 5000:
+        key4 = "key4"
+        print("you now get +50 per second")
+    else:
+        print("insufficent funds")
+
+
+
+
+def button_click():
+    global total, key, key2, key3
+    total += 1
+    print(total)
+    if key == "upgrade1":
+        total += 5
+        print(total)
+    if key2 == "upgrade2":
+        total += 10
+        print(total)
+    if key3 == "upgrade3":
+        total += 20
+        print(total)
+
+def auto_click_50():
+    global total, key4
+    if key4 == "key4":
+        total += 50
+        print(total)
+        window.after(1000,  auto_click_50)
+    else:
+        print("insufficent funds")
+
+click_button = customtkinter.CTkButton(master=window,
+                                       text="click me",
+                                       command=button_click)
+click_button.pack(pady=4)
+
+button_upgrade_1 = customtkinter.CTkButton(master=window,
+                                           text="upgrade +5",
+                                           command=upgrade_1)
+button_upgrade_1.pack(padx=50, pady=50)
+
+button_upgrade_2 = customtkinter.CTkButton(master=window,
+                                           text="upgrade +10",
+                                           command=upgrade_2)
+button_upgrade_2.pack(padx=50, pady=51)
+
+button_upgrade_3 = customtkinter.CTkButton(master=window,
+                                           text="upgrade +20",
+                                           command= upgrade_3)
+button_upgrade_3.pack(padx=50,pady=52)
+
+button_upgrade_4 = customtkinter.CTkButton(master=window,
+                                           text="+50 per second",
+                                           command= auto_click_50)
+button_upgrade_4.pack(padx=50,pady=54)
+
+window.mainloop()
