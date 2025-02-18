@@ -38,17 +38,19 @@ def upgrade_3():
 
 def upgrade_4():
     global total, key4
-    if total >= 5000:
-        key4 = "key4"
-        print("you now get +50 per second")
+    if total >= 10:
+        total -= 10
+        key4 = "upgrade4"
+        print("i have figured it out")
+        auto_click_50()
     else:
-        print("insufficent funds")
-
+        print("Insufficent funds")
+        
 
 
 
 def button_click():
-    global total, key, key2, key3
+    global total, key, key2, key3, key4
     total += 1
     print(total)
     if key == "upgrade1":
@@ -63,7 +65,7 @@ def button_click():
 
 def auto_click_50():
     global total, key4
-    if key4 == "key4":
+    if key4 == "upgrade4":
         total += 50
         print(total)
         window.after(1000,  auto_click_50)
@@ -92,7 +94,7 @@ button_upgrade_3.pack(padx=50,pady=52)
 
 button_upgrade_4 = customtkinter.CTkButton(master=window,
                                            text="+50 per second",
-                                           command= auto_click_50)
+                                           command= upgrade_4)
 button_upgrade_4.pack(padx=50,pady=54)
 
 window.mainloop()
